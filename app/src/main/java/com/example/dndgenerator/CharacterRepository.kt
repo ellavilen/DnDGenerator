@@ -6,26 +6,30 @@ import androidx.lifecycle.MutableLiveData
 import com.example.dndgenerator.CharacterDAO
 
 class CharacterRepository(context: Context) {
-    private var characterDao : CharacterDAO?
+    private var characterDao : CharacterDAO
 
     init {
-        val characterRoomDatabase = CharacterRoomDatabase.getCharacterRoomDatabase(context)
-        characterDao = characterRoomDatabase!!.characterDao()
+        val database = CharacterRoomDatabase.getCharacterRoomDatabase(context)
+        characterDao = database!!.characterDao()
     }
 
-    fun getAllCharacters(): LiveData<Character>?{
-        return characterDao?.getAllCharacters()
+    fun getAllCharacters(): List<Character>{
+        return characterDao.getAllCharacters()
     }
 
     suspend fun insertCharacter(character: Character){
-        characterDao?.insertCharacter(character)
+        characterDao.insertCharacter(character)
     }
 
     suspend fun deleteCharacter(character: Character){
-        characterDao?.deleteCharacter(character)
+        characterDao.deleteCharacter(character)
+    }
+
+    suspend fun deleteAllCharacters(character: Character){
+        characterDao.deleteAllCharacters()
     }
 
     suspend fun updateCharacter(character: Character){
-        characterDao?.updateCharacter(character)
+        characterDao.updateCharacter(character)
     }
 }

@@ -24,7 +24,6 @@ abstract class CharacterRoomDatabase : RoomDatabase(){
                                 context.applicationContext,
                                 CharacterRoomDatabase::class.java, DATABASE_NAME
                             )
-                                .allowMainThreadQueries()
                                 .build()
                         }
                     }
