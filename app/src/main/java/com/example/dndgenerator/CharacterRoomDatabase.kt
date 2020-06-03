@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 
-@Database(entities = [Character::class], version = 2, exportSchema = false)
+@Database(entities = [Character::class], version = 3, exportSchema = false)
 
 abstract class CharacterRoomDatabase : RoomDatabase(){
         abstract fun characterDao(): CharacterDAO

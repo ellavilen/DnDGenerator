@@ -66,22 +66,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Generate name, race and class
-    private fun setName() {
+    private fun setName() : String {
+        val name: TextView = findViewById(R.id.tvName)
         if (rbFemale.isChecked)  {
-            val female: TextView = findViewById(R.id.tvName)
-            female.text = FemaleName.FEMALE_NAMES.random()
+            name.text = FemaleName.FEMALE_NAMES.random()
         } else {
-            val male: TextView = findViewById(R.id.tvName)
-            male.text = (MaleName.MALE_NAMES.random())
+            name.text = (MaleName.MALE_NAMES.random())
         }
     }
 
-    private fun setRace(){
+    private fun setRace() : String{
         val race: TextView = findViewById(R.id.tvRace)
-        race.text = Race.RACE.random().toString()
+        race.text = Race.RACE.random()
     }
 
-    private fun setClass(){
+    private fun setClass() : String {
         val charClass: TextView = findViewById(R.id.tvClass)
         charClass.text = CharacterClass.CLASS.random()
     }
