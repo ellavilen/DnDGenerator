@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -26,13 +28,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var characterRepo: CharacterRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
-    private val error = MutableLiveData<String?>()
+    //private val error = MutableLiveData<String?>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
 
         characterRepo = CharacterRepository(this)
 
@@ -63,18 +66,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Generate name, race and class
-    private fun setName(){
-        if(rbFemale.isChecked) {
-            tvName.setText(FemaleName.FEMALE_NAMES.random())
-        } else tvName.setText(MaleName.MALE_NAMES.random())
+    private fun setName() {
+        if (rbFemale.isChecked)  {
+            val female: TextView = findViewById(R.id.tvName)
+            female.text = FemaleName.FEMALE_NAMES.random()
+        } else {
+            val male: TextView = findViewById(R.id.tvName)
+            male.text = (MaleName.MALE_NAMES.random())
+        }
     }
 
     private fun setRace(){
-        tvRace.setText(Race.RACE.random())
+        val race: TextView = findViewById(R.id.tvRace)
+        race.text = Race.RACE.random().toString()
     }
 
     private fun setClass(){
-        tvClass.setText(CharacterClass.CLASS.random())
+        val charClass: TextView = findViewById(R.id.tvClass)
+        charClass.text = CharacterClass.CLASS.random()
     }
 
     //save generated character

@@ -13,10 +13,17 @@ data class Character(
     @ColumnInfo(name = "id")
     var id: Long? = null,
 
-    @ColumnInfo(name = "character")
+    @ColumnInfo(name = "name")
     var name: String,
+
+    @ColumnInfo(name = "race")
     var race: String,
+
+    @ColumnInfo(name = "class")
     var characterClass: String,
+
+    @ColumnInfo(name = "description")
     var description: String
 
 ) : Parcelable
+
