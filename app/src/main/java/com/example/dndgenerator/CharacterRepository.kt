@@ -1,9 +1,6 @@
 package com.example.dndgenerator
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.dndgenerator.CharacterDAO
 
 class CharacterRepository(context: Context) {
     private var characterDao : CharacterDAO
@@ -25,7 +22,7 @@ class CharacterRepository(context: Context) {
         characterDao.deleteCharacter(character)
     }
 
-    suspend fun deleteAllCharacters(character: Character){
+    suspend fun deleteAllCharacters(){
         characterDao.deleteAllCharacters()
     }
 

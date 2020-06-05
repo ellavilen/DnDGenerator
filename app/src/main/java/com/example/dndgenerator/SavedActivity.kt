@@ -84,12 +84,12 @@ class SavedActivity : AppCompatActivity() {
     }
 
     private fun clearCharacterHistory() {
-        /*mainScope.launch {
+        mainScope.launch {
             withContext(Dispatchers.IO){
                 characterRepo.deleteAllCharacters()
             }
             getSavedCharacters()
-            //Toast.makeText(this, "All saved characters deleted.", Toast.LENGTH_LONG).show()
-        }*/
+            Toast.makeText(this@SavedActivity, "All saved characters deleted.", Toast.LENGTH_LONG).show()
+        }
     }
 }

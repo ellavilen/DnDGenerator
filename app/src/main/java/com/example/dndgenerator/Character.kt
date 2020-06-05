@@ -14,16 +14,16 @@ data class Character(
     var id: Long? = null,
 
     @ColumnInfo(name = "name")
-    var name: String? = null,
+    var name: String?,
 
     @ColumnInfo(name = "race")
-    var race: String? = null,
+    var race: String?,
 
     @ColumnInfo(name = "class")
-    var characterClass: String? = null,
+    var characterClass: String?,
 
     @ColumnInfo(name = "description")
-    var description: String? = null
+    var description: String?
 
 ) : Parcelable
 

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var characterRepo: CharacterRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
-    //private val error = MutableLiveData<String?>()
+    private val error = MutableLiveData<String?>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,50 +66,52 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Generate name, race and class
-    private fun setName() : String {
-        val name: TextView = findViewById(R.id.tvName)
+    private fun setName(){
         if (rbFemale.isChecked)  {
-            name.text = FemaleName.FEMALE_NAMES.random()
+            tvName.text = FemaleName.FEMALE_NAMES.random().toString()
         } else {
-            name.text = (MaleName.MALE_NAMES.random())
+            tvName.text = (MaleName.MALE_NAMES.random().toString())
         }
     }
 
-    private fun setRace() : String{
-        val race: TextView = findViewById(R.id.tvRace)
-        race.text = Race.RACE.random()
+    private fun setRace(){
+        tvRace.text = Race.RACE.random().toString()
     }
 
-    private fun setClass() : String {
-        val charClass: TextView = findViewById(R.id.tvClass)
-        charClass.text = CharacterClass.CLASS.random()
+    private fun setClass(){
+        tvClass.text = CharacterClass.CLASS.random().toString()
     }
 
     //save generated character
     private fun saveCharacter(){
-        mainScope.launch {
-            val character = Character(
-                name = tvName.toString(),
-                race = tvRace.toString(),
-                characterClass = tvClass.toString(),
-                description = ""
-            )
-            withContext(Dispatchers.IO) {
-                characterRepo.insertCharacter(character)
+        if(tvName.toString().isNotBlank() && tvRace.toString().isNotBlank() && tvClass.toString().isNotBlank()) {
+            mainScope.launch {
+                val character = Character(
+                    name = tvName.toString(),
+                    race = tvRace.toString(),
+                    characterClass = tvClass.toString(),
+                    description = ""
+                )
+                withContext(Dispatchers.IO) {
+                    characterRepo.insertCharacter(character)
+                }
+                Toast.makeText(this@MainActivity, "Character saved", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(this, "Can't save empty character", Toast.LENGTH_SHORT).show()
         }
-
-        /*fun isCharacterValid():Boolean{
-            return when {
-                tvName.text == null && tvRace.text == null && tvClass.text == null -> {
-                    error.value = "Can't save empty character!"
-                    val message = error.value.toString()
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                    false
-                } else -> true
-            }
-        }*/
     }
+
+    /*fun isCharacterValid():Boolean{
+        return when {
+            tvName.text == null && tvRace.text == null && tvClass.text == null -> {
+                error.value = "Can't save empty character!"
+                val message = error.value.toString()
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                false
+            } else -> true
+        }
+    }*/
 
     //go to saved characters
     private fun startSavedActivity() {
