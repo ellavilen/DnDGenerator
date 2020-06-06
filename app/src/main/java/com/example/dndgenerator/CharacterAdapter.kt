@@ -15,6 +15,7 @@ class CharacterAdapter(private val characters: List<Character>): RecyclerView.Ad
             itemView.tvSavedName.text = "Name:" + character.name
             itemView.tvSavedRace.text = "Race: " + character.race
             itemView.tvSavedClass.text = "Class: " + character.characterClass
+            itemView.tvDescription.text = "Description: " + character.description
         }
     }
 

@@ -84,13 +84,13 @@ class MainActivity : AppCompatActivity() {
 
     //save generated character
     private fun saveCharacter(){
-        if(tvName.toString().isNotBlank() && tvRace.toString().isNotBlank() && tvClass.toString().isNotBlank()) {
+        if(tvName.text.toString().isNotBlank() && tvRace.text.toString().isNotBlank() && tvClass.text.toString().isNotBlank()) {
             mainScope.launch {
                 val character = Character(
-                    name = tvName.toString(),
-                    race = tvRace.toString(),
-                    characterClass = tvClass.toString(),
-                    description = ""
+                    name = tvName.text.toString(),
+                    race = tvRace.text.toString(),
+                    characterClass = tvClass.text.toString(),
+                    description = etDescription.text.toString()
                 )
                 withContext(Dispatchers.IO) {
                     characterRepo.insertCharacter(character)

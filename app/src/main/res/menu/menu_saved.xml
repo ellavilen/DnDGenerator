@@ -5,8 +5,8 @@
     tools:context="com.example.rps.GameHistoryActivity">
     <item
         android:id="@+id/action_clear"
-        android:icon="@android:drawable/ic_delete"
+        android:icon="@drawable/trash"
         android:orderInCategory="100"
-        android:title="Clear history"
-        app:showAsAction="ifRoom" />
+        android:title="Delete all characters"
+        app:showAsAction="always" />
 </menu>

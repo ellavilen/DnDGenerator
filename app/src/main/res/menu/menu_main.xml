@@ -4,7 +4,8 @@
     tools:context="com.example.DnDGenerator.MainActivity">
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/saved"
         android:orderInCategory="100"
-        android:title="Saved Charactes"
-        app:showAsAction="never" />
+        android:title="Saved characters"
+        app:showAsAction="always"/>
 </menu>

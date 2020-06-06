@@ -1,24 +1,23 @@
 package com.example.dndgenerator
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import kotlinx.android.synthetic.main.activity_saved.*
 import kotlinx.android.synthetic.main.content_saved.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.android.synthetic.main.item_character.*
+import kotlinx.coroutines.*
+
 
 class SavedActivity : AppCompatActivity() {
 
@@ -69,7 +68,10 @@ class SavedActivity : AppCompatActivity() {
             )
         )
         getSavedCharacters()
+        createItemTouchHelper().attachToRecyclerView(rvSavedCharacters)
+
     }
+
 
     private fun getSavedCharacters() {
         mainScope.launch {
@@ -91,5 +93,31 @@ class SavedActivity : AppCompatActivity() {
             getSavedCharacters()
             Toast.makeText(this@SavedActivity, "All saved characters deleted.", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun createItemTouchHelper(): ItemTouchHelper{
+        //swiping left to delete
+        val callback = object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+
+            // Enables or Disables the ability to move items up and down.
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder):Boolean{
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val characterToDelete = characters[position]
+                mainScope.launch {
+                    withContext(Dispatchers.IO){
+                        characterRepo.deleteCharacter(characterToDelete)
+                    }
+                }
+
+                characters.removeAt(position)
+                characterAdapter.notifyDataSetChanged()
+
+            }
+        }
+        return ItemTouchHelper(callback)
     }
 }
