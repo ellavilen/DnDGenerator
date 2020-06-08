@@ -8,5 +8,5 @@
         android:icon="@drawable/trash"
         android:orderInCategory="100"
         android:title="Delete all characters"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
 </menu>

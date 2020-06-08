@@ -26,8 +26,4 @@ class CharacterRepository(context: Context) {
     suspend fun deleteAllCharacters(){
         characterDao.deleteAllCharacters()
     }
-
-    suspend fun updateCharacter(character: Character){
-        characterDao.updateCharacter(character)
-    }
 }

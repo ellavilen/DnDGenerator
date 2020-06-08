@@ -25,5 +25,5 @@ data class Character(
     @ColumnInfo(name = "description")
     var description: String?
 
-) : Parcelable
+) : Parcelable //will be saved into local storage
 

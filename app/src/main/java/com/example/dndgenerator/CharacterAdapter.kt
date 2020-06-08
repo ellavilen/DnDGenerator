@@ -11,8 +11,9 @@ class CharacterAdapter(private val characters: List<Character>): RecyclerView.Ad
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
+        //what will be showed in the recyclerview
         fun bind(character: Character) {
-            itemView.tvSavedName.text = "Name:" + character.name
+            itemView.tvSavedName.text = "Name: " + character.name
             itemView.tvSavedRace.text = "Race: " + character.race
             itemView.tvSavedClass.text = "Class: " + character.characterClass
             itemView.tvDescription.text = "Description: " + character.description
@@ -25,7 +26,7 @@ class CharacterAdapter(private val characters: List<Character>): RecyclerView.Ad
         )
     }
     override fun getItemCount(): Int {
-        return characters.size
+        return characters.size //returns all the characters in the list
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

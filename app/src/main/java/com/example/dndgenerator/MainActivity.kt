@@ -28,14 +28,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var characterRepo: CharacterRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
-    private val error = MutableLiveData<String?>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
 
         characterRepo = CharacterRepository(this)
 
@@ -50,11 +47,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //inflate menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
+    //function for menu item
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
@@ -102,22 +101,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /*fun isCharacterValid():Boolean{
-        return when {
-            tvName.text == null && tvRace.text == null && tvClass.text == null -> {
-                error.value = "Can't save empty character!"
-                val message = error.value.toString()
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                false
-            } else -> true
-        }
-    }*/
-
     //go to saved characters
     private fun startSavedActivity() {
         val intent = Intent(this, SavedActivity::class.java)
         startActivity(intent)
     }
-
 
 }

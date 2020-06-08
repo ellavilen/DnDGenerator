@@ -21,7 +21,6 @@ import kotlinx.coroutines.*
 
 class SavedActivity : AppCompatActivity() {
 
-
     private val characters = arrayListOf<Character>()
     private val characterAdapter = CharacterAdapter(characters)
 
@@ -58,6 +57,12 @@ class SavedActivity : AppCompatActivity() {
         }
     }
 
+    //go back to main activity
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     private fun initView() {
         rvSavedCharacters.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvSavedCharacters.adapter = characterAdapter
@@ -68,7 +73,7 @@ class SavedActivity : AppCompatActivity() {
             )
         )
         getSavedCharacters()
-        createItemTouchHelper().attachToRecyclerView(rvSavedCharacters)
+        createItemTouchHelper().attachToRecyclerView(rvSavedCharacters) //swipe to delete
 
     }
 
@@ -107,6 +112,8 @@ class SavedActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val characterToDelete = characters[position]
+
+                //to delete also from db, not only recyclerview
                 mainScope.launch {
                     withContext(Dispatchers.IO){
                         characterRepo.deleteCharacter(characterToDelete)

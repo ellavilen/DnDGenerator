@@ -75,6 +75,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/generate"
         android:textSize="18sp"
+        android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
@@ -196,6 +197,7 @@
         android:background="@color/colorAccent"
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/save"
+        android:padding="2dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
