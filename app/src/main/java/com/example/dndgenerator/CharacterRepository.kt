@@ -11,7 +11,7 @@ class CharacterRepository(context: Context) {
         characterDao = database!!.characterDao()
     }
 
-    fun getAllCharacters(): List<Character>{
+    fun getAllCharacters(): LiveData<List<Character>>{
         return characterDao.getAllCharacters()
     }
 

@@ -9,7 +9,7 @@ import androidx.room.*
 @Dao
 interface CharacterDAO {
     @Query("SELECT * FROM characterTable")
-    fun getAllCharacters(): List<Character>
+    fun getAllCharacters(): LiveData<List<Character>>
 
     @Insert
     suspend fun insertCharacter(character : Character)
@@ -20,6 +20,4 @@ interface CharacterDAO {
     @Query("DELETE FROM characterTable")
     suspend fun deleteAllCharacters()
 
-    @Update
-    suspend fun updateCharacter(character: Character)
 }

@@ -4,16 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.random.Random
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.dndgenerator.R
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -24,7 +17,6 @@ import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var characterRepo: CharacterRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
@@ -36,16 +28,21 @@ class MainActivity : AppCompatActivity() {
 
         characterRepo = CharacterRepository(this)
 
-        btnGenerate.setOnClickListener(){
+        initView()
+    }
+
+    private fun initView() {
+        btnGenerate.setOnClickListener() {
             setName()
             setRace()
             setClass()
-         }
+        }
 
-        btnSave.setOnClickListener(){
+        btnSave.setOnClickListener() {
             saveCharacter()
         }
     }
+
 
     //inflate menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -65,25 +62,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Generate name, race and class
-    private fun setName(){
-        if (rbFemale.isChecked)  {
+    private fun setName() {
+        if (rbFemale.isChecked) {
             tvName.text = FemaleName.FEMALE_NAMES.random().toString()
         } else {
             tvName.text = (MaleName.MALE_NAMES.random().toString())
         }
     }
 
-    private fun setRace(){
+    private fun setRace() {
         tvRace.text = Race.RACE.random().toString()
     }
 
-    private fun setClass(){
+    private fun setClass() {
         tvClass.text = CharacterClass.CLASS.random().toString()
     }
 
     //save generated character
-    private fun saveCharacter(){
-        if(tvName.text.toString().isNotBlank() && tvRace.text.toString().isNotBlank() && tvClass.text.toString().isNotBlank()) {
+    private fun saveCharacter() {
+        if (tvName.text.toString().isNotBlank() && tvRace.text.toString().isNotBlank() && tvClass.text.toString().isNotBlank()) {
             mainScope.launch {
                 val character = Character(
                     name = tvName.text.toString(),
@@ -106,5 +103,4 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, SavedActivity::class.java)
         startActivity(intent)
     }
-
 }
